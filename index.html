@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이 구역의 나는?!</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css?v=1>">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./assets/js/common.js?v=1"></script>
+    <script src="./assets/js/click.function.js?v=1"></script>
+
+    <script>
+        let trial = null;
+    </script>
+</head>
+<body>
+    <div id="wrap" class="intro">
+        <div id="mainWrap">
+            <img src="./assets/img/main/intro.png" class="mt100" usemap="#intro">
+            <map name="intro">
+                <area shape="rect" coords="140,267,258,386" href="javascript:trialBoot()">
+            </map>
+
+            <strong class="font-nsr ptt">현재까지 총 <b>62,116,130<b>명이 참여했어요.</strong>
+        </div>
+
+        <div class="none" id="quiz">
+            <div class="question"><h5 class="question-p" id="subject"></h5></div>
+
+            <div class="option-btn-div" id="question">
+<!--                <button value="I" class="option-btn" style="color: black;"></button>-->
+<!--                <button value="E" class="option-btn" style="color: black;"></button>-->
+            </div>
+
+        </div>
+
+        <div id="count" class="none">
+            <div id="myProgress">
+                <div id="myBar">
+                    <div id="label"></div>
+                </div>
+            </div>
+            <div id="myProgressInfo">
+                <span id="nowP"></span> / <span id="endP"></span>
+            </div>
+        </div>
+
+
+       <div class="copyright">
+			<p>이 유형검사는 도메인 / 솔루션 NO.1 후이즈와 함께합니다.<br> 본 검사는 정확한 결과가 아니며 재미로 테스트 하시기 바랍니다.</p>
+		</div>
+    </div>
+</body>
+</html>
