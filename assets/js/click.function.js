@@ -10,5 +10,9 @@ $(function(){
         init.shareUrlCopy();
     });
 
+    $("#retryWrap").click(function(){
+        location.replace('/');
+    });
+
     
 })
