@@ -203,7 +203,7 @@ class Trial {
     drawMBTI = (object) => {
         let data = JSON.parse(object);
 
-        document.getElementById("quiz").innerHTML = "<div class='question'><h5 class='question-p'>내가 이구역의 <br>\""+data[0][this.myIcon].TITLE+"\"</h5><br><br><img style='max-width:100%;' src='"+data[0][this.myIcon].IMG+"'></div>";
+        document.getElementById("quiz").innerHTML = "<div class='question'><h5 class='question-p'>내가 이구역의 <br>\""+data[0][this.myIcon].TITLE+"\" ("+this.myIcon+")</h5><br><br><img style='max-width:100%;' src='"+data[0][this.myIcon].IMG+"'></div>";
     }
 
 }
