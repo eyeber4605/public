@@ -1,14 +1,14 @@
 /***** @trial class *****/
 
-const QuestionData  = './assets/json/question.json?v=1004';
-const MBTIData      = './assets/json/mbti.json?v=1004';
+const QuestionData  = './assets/json/question.json?v=1005';
+const MBTIData      = './assets/json/mbti.json?v=1005';
 
 
 class Trial {
 
+    static lock     = false;
     static answer   = [];
     static page     = 1;
-    static Lock     = false;
 
     constructor(dataType = "json") {
         console.log('class Trial instance');
@@ -89,10 +89,10 @@ class Trial {
 
     answerHit(v) {
         if (Trial.page >= this.q.length) {
-            if(!Trial.Lock){
+            if(!Trial.lock){
                 Trial.answer.push(v);
             }
-            Trial.Lock = true;
+            Trial.lock = true;
             this.finish();
             return true;
         }
@@ -105,9 +105,9 @@ class Trial {
 
     finish = () => {
         // 결과 정책은 아래와 같습니다.
-        // EI / NS / FT / FJ
+        // E,I / N,S / F,T / F,J
         // ==========================
-        // -A:3 / -B:2
+        // -A:3점 / -B:2점
         // ==========================
 
         let [E, I, N, S, F, T, J, P] = [0, 0, 0, 0, 0, 0, 0, 0];
@@ -202,8 +202,14 @@ class Trial {
 
     drawMBTI = (object) => {
         let data = JSON.parse(object);
-
         document.getElementById("quiz").innerHTML = "<div class='question'><h5 class='question-p'>내가 이구역의 <br>\""+data[0][this.myIcon].TITLE+"\" ("+this.myIcon+")</h5><br><br><img style='max-width:100%;' src='"+data[0][this.myIcon].IMG+"'></div>";
+        this.ElementIDRemoveClass('quiz','none');
+        this.ElementIDRemoveClass('retryWrap','none');
+        init.setCopyUrl(window.location.href+"?mbti="+this.myIcon);
+    }
+
+    setMyicon = (myIcon) => {
+        this.myIcon = myIcon;
     }
 
 }
@@ -220,12 +226,19 @@ trialBoot = () => {
 /****@ init Variable function ****/
 const init = {
     main_init: function () {
-        $("#shareUrl").val(window.location.href);
+        this.setCopyUrl();
 
         // 크롬 브라우저 확인
         let agent = navigator.userAgent.toLowerCase();
         if (agent.indexOf("chrome") === -1) {
             alert("Chrome 브라우저 및 최신 브라우저가 아닌경우 정상 작동 하지않을 수 있습니다.");
+        }
+
+        if(this.getParameter('mbti')){ // 결과 보기
+            trial = new Trial();
+            trial.Trialboot();
+            trial.setMyicon(this.getParameter('mbti'))
+            trial.showElementMBTI(this.getParameter('mbti'));
         }
     },
 
@@ -236,6 +249,21 @@ const init = {
         document.execCommand('copy');
         ShareUrl.style.display = 'none';
         alert('링크가 복사 되었습니다');
+    },
+
+    setCopyUrl : function(url = ""){
+        if(url===""){
+            $("#shareUrl").val(window.location.href);
+        }else{
+            $("#shareUrl").val(url);
+        }
+    },
+
+    getParameter : function(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
 
