@@ -1,7 +1,7 @@
 /***** @trial class *****/
 
-const QuestionData  = './assets/json/question.json?v=1005';
-const MBTIData      = './assets/json/mbti.json?v=1005';
+const QuestionData  = './assets/json/question.json?v=777';
+const MBTIData      = './assets/json/mbti.json?v=777';
 
 
 class Trial {
@@ -261,7 +261,7 @@ const init = {
 
     getParameter : function(name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        let regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
             results = regex.exec(location.search);
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
